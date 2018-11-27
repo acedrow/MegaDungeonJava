@@ -1,4 +1,4 @@
-package gfx;
+package assets;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

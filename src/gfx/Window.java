@@ -1,4 +1,4 @@
-package core;
+package gfx;
 
 import java.awt.Canvas;
 import java.awt.Color;
