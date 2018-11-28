@@ -26,7 +26,6 @@ public class Game implements Runnable{
 		height = h;
 		title = t;
 	}
-	
 	private void init(){
 		window = new Window(width, height, title); 
 		
@@ -70,7 +69,17 @@ public class Game implements Runnable{
 		
 	}
 	
-	//CALLED ONCE PER TICK - BE CAREFUL
+	//TEST TEST TEST
+	private void testRender(BufferedImage image){
+		bs = window.getCanvas().getBufferStrategy();
+		if (bs == null){
+			window.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		g = bs.getDrawGraphics();
+	}
+	
+	//CALLED ONCE PER TICK - BE CAREFUL - this whole architecture choice is from the tutorial, might want to rethink
 	private void render() {
 		bs = window.getCanvas().getBufferStrategy();
 		if (bs == null){
@@ -78,10 +87,9 @@ public class Game implements Runnable{
 			return;
 		}
 		g = bs.getDrawGraphics();
-		//should only be doing this if we need to?
+		//this is from tutorial code, do I need it?
 		g.clearRect(0, 0, width, height);
 		//draw here
-		
 		
 		//end drawing
 		bs.show();

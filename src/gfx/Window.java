@@ -29,7 +29,6 @@ public class Window {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		
-		
 		frame.add(canvas);
 		frame.pack();
 		frame.setVisible(true);
