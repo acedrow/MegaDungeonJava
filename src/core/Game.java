@@ -8,10 +8,14 @@ import java.awt.image.BufferedImage;
 import assets.TextureLoader;
 import gfx.SpriteSheet;
 import gfx.Window;
+import map.Chunk;
+import map.World;
 
 public class Game implements Runnable{
 	
 	private Window window;
+	private World map;
+	
 	public int width, height;
 	public String title;
 
@@ -28,6 +32,8 @@ public class Game implements Runnable{
 	}
 	private void init(){
 		window = new Window(width, height, title); 
+		//TEST CODE
+		map = new World(new Chunk(0,0,null));
 		
 	}
 
@@ -68,17 +74,7 @@ public class Game implements Runnable{
 		stop();
 		
 	}
-	
-	//TEST TEST TEST
-	private void testRender(BufferedImage image){
-		bs = window.getCanvas().getBufferStrategy();
-		if (bs == null){
-			window.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-	}
-	
+		
 	//CALLED ONCE PER TICK - BE CAREFUL - this whole architecture choice is from the tutorial, might want to rethink
 	private void render() {
 		bs = window.getCanvas().getBufferStrategy();
@@ -90,7 +86,7 @@ public class Game implements Runnable{
 		//this is from tutorial code, do I need it?
 		g.clearRect(0, 0, width, height);
 		//draw here
-		
+		map.testRender(g);
 		//end drawing
 		bs.show();
 		g.dispose();

@@ -9,17 +9,22 @@ import core.GameConstants;
 //loads and manages assets
 public class AssetManager {
 
-	public Map<Byte, BufferedImage> tileFloorTextures;
-
-	Map<Byte, String> tileFloorType;
+	static Map<Byte, BufferedImage> tileFloorTextures;
+	static Map<Byte, String> tileFloorType;
+	private static boolean loaded = false;
+	
 
 	//on construction, loads all assets into memory.
 	public AssetManager(){
-		init();
+		loadAssets();
 	}
 
-	public void init(){
+	private void loadAssets(){
+		//load here
 		initFloorTypes();
+		
+		//done loading
+		loaded = true;
 	}
 
 	//create hardcoded mapping of tile floor type codes to floor type strings - directly corresponding to file names in /resources/textures/floors.
@@ -40,9 +45,18 @@ public class AssetManager {
 			
 			String imageString = tileFloorType.get((byte) i);
 			String path = GameConstants.FLOOR_TEXTURE_PATH + "/" + imageString + GameConstants.TEXTURE_IMAGE_FILE_EXTENSION;
-			TextureLoader.loadTexture(path);
+			BufferedImage toAdd = TextureLoader.loadTexture(path);
+			toReturn.put((byte)i, toAdd);
 		}
 		return toReturn;
+	}
+	
+	public static Map<Byte, BufferedImage> getFloorTextures(){
+		if (!loaded){
+			System.out.println("load not complete");
+			return null;
+		}
+		return tileFloorTextures;
 	}
 
 }
