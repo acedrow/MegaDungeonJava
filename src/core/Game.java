@@ -29,16 +29,13 @@ public class Game implements Runnable{
 		width = w;
 		height = h;
 		title = t;
-	}
-	private void init(){
-		window = new Window(width, height, title); 
-		//TEST CODE
-		map = new World(new Chunk(0,0,null));
 		
+		window = new Window(this, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT, "MegaDungeon");
+		window.run();
+
 	}
 
 	public void run() {
-		init();
 
 		int fps = GameConstants.GAME_FPS;
 		double timePerTick = 1000000000 / fps;
@@ -75,21 +72,8 @@ public class Game implements Runnable{
 		
 	}
 		
-	//CALLED ONCE PER TICK - BE CAREFUL - this whole architecture choice is from the tutorial, might want to rethink
 	private void render() {
-		bs = window.getCanvas().getBufferStrategy();
-		if (bs == null){
-			window.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-		//this is from tutorial code, do I need it?
-		g.clearRect(0, 0, width, height);
-		//draw here
-		map.testRender(g);
-		//end drawing
-		bs.show();
-		g.dispose();
+
 	}
 
 	private void tick() {
@@ -113,9 +97,11 @@ public class Game implements Runnable{
 		running = false;
 		try {
 			thread.join();
+			System.out.println("Ending game thread");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		System.exit(0);
 	}
 
 }
