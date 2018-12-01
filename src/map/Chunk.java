@@ -1,5 +1,6 @@
 package map;
 
+import core.AppConstants;
 import core.GameConstants;
 
 //game world is made of chunks, each holds x by x (defined in constants) tiles in an array, origin at the top left corner.

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-import core.GameConstants;
+import core.AppConstants;
 
 //loads and manages assets
 public class AssetManager {
@@ -44,7 +44,7 @@ public class AssetManager {
 		for(int i = startIndex; Math.abs(i) < countTileTypes; i++){
 			
 			String imageString = tileFloorType.get((byte) i);
-			String path = GameConstants.FLOOR_TEXTURE_PATH + "/" + imageString + GameConstants.TEXTURE_IMAGE_FILE_EXTENSION;
+			String path = AppConstants.FLOOR_TEXTURE_PATH + "/" + imageString + AppConstants.TEXTURE_IMAGE_FILE_EXTENSION;
 			BufferedImage toAdd = TextureLoader.loadTexture(path);
 			toReturn.put((byte)i, toAdd);
 		}

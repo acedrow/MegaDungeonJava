@@ -10,11 +10,10 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 
 //Launcher class
-public class GameDriver {
+public class Main {
 	
 	public static void main(String args[]){
-		Game game = new Game(GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT, "MegaDungeon");
-		game.start();
+		Application.init();
 	}
 	
 }

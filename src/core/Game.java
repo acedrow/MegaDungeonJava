@@ -7,13 +7,11 @@ import java.awt.image.BufferedImage;
 
 import assets.TextureLoader;
 import gfx.SpriteSheet;
-import gfx.Window;
 import map.Chunk;
 import map.World;
 
 public class Game implements Runnable{
 	
-	private Window window;
 	private World map;
 	
 	public int width, height;
@@ -25,19 +23,13 @@ public class Game implements Runnable{
 	private BufferStrategy bs;
 	private Graphics g; 
 
-	public Game(int w, int h, String t){
-		width = w;
-		height = h;
-		title = t;
-		
-		window = new Window(this, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT, "MegaDungeon");
-		window.run();
+	public Game(){
 
 	}
 
 	public void run() {
 
-		int fps = GameConstants.GAME_FPS;
+		int fps = AppConstants.GAME_FPS;
 		double timePerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
