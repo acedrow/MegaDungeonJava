@@ -7,93 +7,99 @@ import java.awt.image.BufferedImage;
 
 import assets.TextureLoader;
 import gfx.SpriteSheet;
+import input.MouseInput;
 import map.Chunk;
 import map.World;
 
 public class Game implements Runnable{
-	
-	private World map;
+
+	Window window;
 	
 	public int width, height;
 	public String title;
 
 	private boolean running = false;
 	private Thread thread;
+	//private final MouseInput mouseInput;
 	
-	private BufferStrategy bs;
-	private Graphics g; 
+	
 
 	public Game(){
+		thread = new Thread(this, "Game Thread");
+		window = Window.appWindow;
+		//mouseInput = new MouseInput();
+	}
+
+	private void init(){
 
 	}
 
 	public void run() {
+		try {
+			init();
+			gameLoop();
+		} catch (Exception excp) {
+			excp.printStackTrace();
+		} finally {
+			cleanup();
+		}
+	}
 
-		int fps = AppConstants.GAME_FPS;
-		double timePerTick = 1000000000 / fps;
+
+	private void gameLoop(){
+		double timePerFrame = AppConstants.ONE_BILLION / AppConstants.GAME_FPS;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int ticks = 0;
-		
-		
-		//game loop - update variables, render them to screen, 
-		while(running){
+		running = true;
+		while (running && !window.windowShouldClose()) {
 			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;			
+			delta += (now - lastTime) / timePerFrame;
 			timer += now - lastTime;
 			lastTime = now;
 			
-			if(delta >= 1){
-				tick();
+			if (delta >= 1){
+				input();
+				update();
 				render();
 				ticks++;
 				delta--;
-				//System.out.println("Ticks");
 			}
 			
-			if(timer >= 1000000000){
-				//System.out.println("Ticks and Frames: " + ticks);
+			if (timer >= AppConstants.ONE_BILLION ){
+				System.out.println("Ticks: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}
 		}
-		
-		stop();
+	}
+	
+
+	//get input from mouse and keyboard managers
+	private void input() {
+
+
+	}
+	//update game logic/game state
+	private void update(){
 		
 	}
-		
+	
+	//render changes to window/GLFW
 	private void render() {
 
 	}
 
-	private void tick() {
 
-		
+	//called from Application to start the game.
+	public void start(){
+		thread.start();
 	}
 
-	public synchronized void start(){
-		if (running){
-			return;
-		}
-		running = true;
-		thread = new Thread(this);
-		thread.start(); // will call run, above, game code (loop) goes there.
-	}
-
-	public synchronized void stop(){
-		if (!running){
-			return;
-		}
-		running = false;
-		try {
-			thread.join();
-			System.out.println("Ending game thread");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.exit(0);
+	private void cleanup(){
+		//cleanup resources and such here
 	}
 
 }

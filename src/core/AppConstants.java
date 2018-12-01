@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class AppConstants {
-
+	
 	public static int GAME_FPS = 30;
 	//application window size
 	public static int WINDOW_WIDTH = 640;
 	public static int WINDOW_HEIGHT = 480;
+	
+	public static final int ONE_BILLION = 1000000000;
 	
 	/*
 	 * PATHS

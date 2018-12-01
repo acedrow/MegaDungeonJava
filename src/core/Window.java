@@ -69,22 +69,10 @@ public class Window {
 		glfwShowWindow(this.windowID);
 
 	}
-
-	/* From Turn-Based Strategy Game, unsure if needed
-	public void setKetInput(GLFWKeyCallback inputCallback) {
-		GLFW.glfwSetKeyCallback(this.windowID, inputCallback);
-		
-	}
-
-	public void setMouseInput(GLFWMouseButtonCallback mouseInputCallback) {
-		GLFW.glfwSetMouseButtonCallback(this.windowID, mouseInputCallback);
-		
-	}
-
-	public void setMousePos(GLFWCursorPosCallback mousePosCallback) {
-		GLFW.glfwSetCursorPosCallback(this.windowID, mousePosCallback);
-		
-	}*/
+	
+	public boolean windowShouldClose() {
+        return glfwWindowShouldClose(this.windowID);
+    }
 
 	public void close(){
 		GLFW.glfwSetWindowShouldClose(this.windowID, true);
