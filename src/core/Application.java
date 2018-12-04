@@ -2,6 +2,8 @@ package core;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
+import assets.Texture;
+
 public class Application {
 	private static Window window;
 	

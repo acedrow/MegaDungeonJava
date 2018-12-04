@@ -89,7 +89,7 @@ public class Game implements Runnable{
 	
 	//render changes to window/GLFW
 	private void render() {
-
+		
 	}
 
 
